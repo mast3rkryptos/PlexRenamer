@@ -18,6 +18,33 @@ namespace PlexRenamer
         private ArrayList files = new ArrayList();
         private IEnumerator filesEnumerator;
 
+        /*** Form init and close ***/
+
+        public Form1()
+        {
+            InitializeComponent();
+
+            // Program specific intialization
+            if (MySettings.Default.Shows != null)
+            {
+                foreach (string show in MySettings.Default.Shows)
+                {
+                    comboBoxShow.Items.Add(show);
+                }
+            }
+            textBoxInputFolder.Text = MySettings.Default.InputFolder;
+            textBoxOutputFolder.Text = MySettings.Default.OutputFolder;
+            textBoxExtensionFilter.Text = MySettings.Default.ExtensionFilter;
+            checkBoxMove.Checked = MySettings.Default.Move;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MySettings.Default.Save();
+        }
+
+        /*** Form utilities ***/
+
         private void ClearFileInfoDisplay()
         {
             textBoxFile.Clear();
@@ -34,8 +61,7 @@ namespace PlexRenamer
         {
             if (checkBoxTitleLookup.Checked && comboBoxType.Text == "TV Shows")
             {
-                string temp = await Utilities.GetTVDBEpisodeTitle(comboBoxShow.Text, comboBoxSeason.Text, comboBoxStartingEpisode.Text);
-                textBoxTitle.Text = temp.Replace(":", "");
+                textBoxTitle.Text = await Utilities.GetTVDBEpisodeTitle(comboBoxShow.Text, comboBoxSeason.Text, comboBoxStartingEpisode.Text);
             }
         }
 
@@ -81,8 +107,10 @@ namespace PlexRenamer
             textBoxDestination.Select(textBoxDestination.Text.Length, 0);
         }
 
-        private void ParseFilepath()
+        private bool UpdateFromPlexFilepath()
         {
+            bool retVal = false;
+
             // Attempt to parse and pre-fill fields from the Plex name format
             string show, season, startingEpisode, endingEpisode, optionalInfo, title, year;
             if (Utilities.ParsePlexTVFilename(textBoxFile.Text, out show, out season, out startingEpisode, out endingEpisode, out optionalInfo))
@@ -92,81 +120,33 @@ namespace PlexRenamer
                 comboBoxSeason.SelectedIndex = comboBoxSeason.Items.IndexOf(season);                                    // This needs to select the index of the season
                 comboBoxStartingEpisode.SelectedIndex = comboBoxSeason.Items.IndexOf(startingEpisode);                  // This needs to select the index of the starting episode
                 comboBoxEndingEpisode.SelectedIndex = comboBoxSeason.Items.IndexOf(endingEpisode);                      // This needs to select the index of the ending episode
-                textBoxTitle.Text = optionalInfo;                                          // This is a textbox
+                textBoxTitle.Text = optionalInfo;                                                                       // This is a textbox
+                retVal = true;
             }
             else if (Utilities.ParsePlexMovieFilename(textBoxFile.Text, out title, out year))
             {
                 comboBoxType.SelectedIndex = comboBoxType.Items.IndexOf("Movies");                                      // This needs to select the index of the type
-                textBoxTitle.Text = title;                                          // This is a textbox
+                textBoxTitle.Text = title;                                                                              // This is a textbox
                 textBoxYear.Text = year;                                                                                // This is a textbox
+                retVal = true;
             }
-            else
-            {
-                // Attempt to infer at least the Season from the filepath
-                Utilities.ParseFilepath(textBoxFile.Text, out season);
-                comboBoxSeason.SelectedIndex = comboBoxSeason.Items.IndexOf(season);                                    // This needs to select the index of the season
-            }
+
+            return retVal;
         }
 
-        public Form1()
+        private void UpdateSeasonFromFilepath()
         {
-            InitializeComponent();
+            string season;
 
-            // Program specific intialization
-            if (MySettings.Default.Shows != null)
-            {
-                foreach (string show in MySettings.Default.Shows)
-                {
-                    comboBoxShow.Items.Add(show);
-                }
-            }
-            textBoxInputFolder.Text = MySettings.Default.InputFolder;
-            textBoxOutputFolder.Text = MySettings.Default.OutputFolder;
-            textBoxExtensionFilter.Text = MySettings.Default.ExtensionFilter;
+            // Attempt to infer at least the Season from the filepath
+            Utilities.ParseNonPlexFilepath(textBoxFile.Text, out season);
+            comboBoxSeason.SelectedIndex = comboBoxSeason.Items.IndexOf(season);                                    // This needs to select the index of the season
         }
 
-        private void buttonApply_Click(object sender, EventArgs e)
-        {
-            // Save off any new entries in Show
-            if (!comboBoxShow.Items.Contains(comboBoxShow.Text))
-            {
-                comboBoxShow.Items.Add(comboBoxShow.Text);
-            }
-            if (!MySettings.Default.Shows.Contains(comboBoxShow.Text))
-            {
-                MySettings.Default.Shows.Add(comboBoxShow.Text);
-            }
-
-            Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(textBoxDestination.Text)));
-            File.Delete(Path.GetFullPath(textBoxDestination.Text));
-            if (checkBoxMove.Checked) File.Move(Path.GetFullPath(textBoxFile.Text), Path.GetFullPath(textBoxDestination.Text));
-            else File.Copy(Path.GetFullPath(textBoxFile.Text), Path.GetFullPath(textBoxDestination.Text));
-
-            if (filesEnumerator.MoveNext()) // Go to the next file in the path
-            {
-                textBoxFile.Text = filesEnumerator.Current.ToString();
-                if (comboBoxType.Text == "TV Shows")
-                {
-                    // Advance Episode number
-                    comboBoxStartingEpisode.SelectedIndex =
-                        comboBoxStartingEpisode.SelectedIndex == comboBoxEndingEpisode.SelectedIndex ?
-                            comboBoxStartingEpisode.SelectedIndex + 1 : comboBoxEndingEpisode.SelectedIndex + 1;
-                }
-
-                textBoxTitle.Clear();
-                ParseFilepath();
-                LookupAndUpdateTitle();
-                UpdateDestination();
-            }
-            else
-            {
-                ClearFileInfoDisplay();
-                MessageBox.Show("End of file list!");
-            }
-        }
-
+        /*** Form interaction events ***/
         private void buttonInputFolder_Click(object sender, EventArgs e)
         {
+            folderBrowserDialog1.SelectedPath = textBoxInputFolder.Text;
             DialogResult result = folderBrowserDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -178,6 +158,7 @@ namespace PlexRenamer
 
         private void buttonOutputFolder_Click(object sender, EventArgs e)
         {
+            folderBrowserDialog1.SelectedPath = textBoxOutputFolder.Text;
             DialogResult result = folderBrowserDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -197,16 +178,41 @@ namespace PlexRenamer
             filesEnumerator.MoveNext();
             textBoxFile.Text = filesEnumerator.Current.ToString();
             textBoxTitle.Clear();
-            ParseFilepath();
+            UpdateFromPlexFilepath();
+            UpdateSeasonFromFilepath();
             LookupAndUpdateTitle();
             UpdateDestination();
         }
 
+        private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxType.Text == "TV Shows")
+            {
+                textBoxYear.Enabled = false;
+                comboBoxShow.Enabled = true;
+                comboBoxSeason.Enabled = true;
+                comboBoxStartingEpisode.Enabled = true;
+                comboBoxEndingEpisode.Enabled = true;
+                textBoxTitle.Enabled = checkBoxTitleLookup.Checked ? false : true;
+                checkBoxTitleLookup.Checked = true;
+            }
+            else if (comboBoxType.Text == "Movies")
+            {
+                textBoxYear.Enabled = true;
+                comboBoxShow.Enabled = false;
+                comboBoxSeason.Enabled = false;
+                comboBoxStartingEpisode.Enabled = false;
+                comboBoxEndingEpisode.Enabled = false;
+                textBoxTitle.Enabled = true;
+                checkBoxTitleLookup.Checked = false;
+            }
+            LookupAndUpdateTitle();
+            UpdateDestination();
+        }
+        
         private void comboBoxShow_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxSeason.SelectedIndex = comboBoxSeason.Items.IndexOf("1");
-            comboBoxStartingEpisode.SelectedIndex = comboBoxStartingEpisode.Items.IndexOf("1");
-            comboBoxEndingEpisode.SelectedIndex = comboBoxStartingEpisode.SelectedIndex;
             LookupAndUpdateTitle();
             UpdateDestination();
         }
@@ -214,8 +220,6 @@ namespace PlexRenamer
         private void comboBoxShow_TextUpdate(object sender, EventArgs e)
         {
             comboBoxSeason.SelectedIndex = comboBoxSeason.Items.IndexOf("1");
-            comboBoxStartingEpisode.SelectedIndex = comboBoxStartingEpisode.Items.IndexOf("1");
-            comboBoxEndingEpisode.SelectedIndex = comboBoxStartingEpisode.SelectedIndex;
             LookupAndUpdateTitle();
             UpdateDestination();
         }
@@ -244,11 +248,6 @@ namespace PlexRenamer
             UpdateDestination();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            MySettings.Default.Save();
-        }
-
         private void buttonFilePlay_Click(object sender, EventArgs e)
         {
             Process p = new Process();
@@ -262,8 +261,8 @@ namespace PlexRenamer
             if (filesEnumerator.MoveNext()) // Go to the next file in the path
             {
                 textBoxFile.Text = filesEnumerator.Current.ToString();
-                textBoxTitle.Clear();
-                ParseFilepath();
+                UpdateFromPlexFilepath();
+                UpdateSeasonFromFilepath();
                 LookupAndUpdateTitle();
                 UpdateDestination();
             }
@@ -274,30 +273,41 @@ namespace PlexRenamer
             }
         }
 
-        private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
+        private void buttonApply_Click(object sender, EventArgs e)
         {
-            if (comboBoxType.Text == "TV Shows")
+            // Save off any new entries in Show
+            if (!comboBoxShow.Items.Contains(comboBoxShow.Text))
             {
-                textBoxYear.Enabled = false;
-                comboBoxShow.Enabled = true;
-                comboBoxSeason.Enabled = true;
-                comboBoxStartingEpisode.Enabled = true;
-                comboBoxEndingEpisode.Enabled = true;
-                textBoxTitle.Enabled = checkBoxTitleLookup.Checked ? false : true;
-                checkBoxTitleLookup.Checked = true;
+                comboBoxShow.Items.Add(comboBoxShow.Text);
             }
-            else if (comboBoxType.Text == "Movies")
+            if (!MySettings.Default.Shows.Contains(comboBoxShow.Text))
             {
-                textBoxYear.Enabled = true;
-                comboBoxShow.Enabled = false;
-                comboBoxSeason.Enabled = false;
-                comboBoxStartingEpisode.Enabled = false;
-                comboBoxEndingEpisode.Enabled = false;
-                textBoxTitle.Enabled = true;
-                checkBoxTitleLookup.Checked = false;
+                MySettings.Default.Shows.Add(comboBoxShow.Text);
             }
-            LookupAndUpdateTitle();
-            UpdateDestination();
+
+            Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(textBoxDestination.Text)));
+            File.Delete(Path.GetFullPath(textBoxDestination.Text));
+            if (checkBoxMove.Checked) File.Move(Path.GetFullPath(textBoxFile.Text), Path.GetFullPath(textBoxDestination.Text));
+            else File.Copy(Path.GetFullPath(textBoxFile.Text), Path.GetFullPath(textBoxDestination.Text));
+
+            if (filesEnumerator.MoveNext()) // Go to the next file in the path
+            {
+                textBoxFile.Text = filesEnumerator.Current.ToString();
+                if (!UpdateFromPlexFilepath() && comboBoxType.Text == "TV Shows")
+                {
+                    // Advance Episode number
+                    comboBoxStartingEpisode.SelectedIndex = comboBoxEndingEpisode.SelectedIndex + 1;
+                }
+
+                UpdateSeasonFromFilepath();
+                LookupAndUpdateTitle();
+                UpdateDestination();
+            }
+            else
+            {
+                ClearFileInfoDisplay();
+                MessageBox.Show("End of file list!");
+            }
         }
 
         private void textBoxYear_TextChanged(object sender, EventArgs e)
@@ -305,9 +315,9 @@ namespace PlexRenamer
             UpdateDestination();
         }
 
-        private async void buttonRefresh_Click(object sender, EventArgs e)
+        private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            textBoxTitle.Text = await Utilities.GetTVDBEpisodeTitle(comboBoxShow.Text, comboBoxSeason.Text, comboBoxStartingEpisode.Text);
+            LookupAndUpdateTitle();
         }
 
         private void checkBoxTitleLookup_CheckedChanged(object sender, EventArgs e)
@@ -317,11 +327,21 @@ namespace PlexRenamer
                 textBoxTitle.Enabled = false;
                 LookupAndUpdateTitle();
             }
-            else
+            else if (checkBoxTitleLookup.Checked && comboBoxType.Text == "TV Shows")
             {
                 textBoxTitle.Enabled = true;
             }
+            else
+            {
+                textBoxTitle.Enabled = true;
+                textBoxTitle.Clear();
+            }
             UpdateDestination();
+        }
+
+        private void checkBoxMove_CheckedChanged(object sender, EventArgs e)
+        {
+            MySettings.Default.Move = checkBoxMove.Checked;
         }
     }
 }

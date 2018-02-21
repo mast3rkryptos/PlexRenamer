@@ -46,7 +46,7 @@ namespace PlexRenamer
             return title;
         }
 
-        static public void ParseFilepath(string filepath, out string season)
+        static public void ParseNonPlexFilepath(string filepath, out string season)
         {
 
             string pattern = @"[seasonSEASON_]+(\d+)[discDISC_]+\d+";

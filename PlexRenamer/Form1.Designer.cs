@@ -471,6 +471,7 @@
             this.checkBoxMove.TabIndex = 12;
             this.checkBoxMove.Text = "Move";
             this.checkBoxMove.UseVisualStyleBackColor = true;
+            this.checkBoxMove.CheckedChanged += new System.EventHandler(this.checkBoxMove_CheckedChanged);
             // 
             // labelExtensionFilter
             // 

@@ -17,5 +17,8 @@
     <Setting Name="ExtensionFilter" Type="System.String" Scope="User">
       <Value Profile="(Default)">mkv, mp4</Value>
     </Setting>
+    <Setting Name="Move" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -72,5 +72,17 @@ namespace PlexRenamer {
                 this["ExtensionFilter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Move {
+            get {
+                return ((bool)(this["Move"]));
+            }
+            set {
+                this["Move"] = value;
+            }
+        }
     }
 }
