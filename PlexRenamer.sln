@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlexRenamer", "PlexRenamer\PlexRenamer.csproj", "{EDE14FF8-9288-4E36-9DD0-F77C605C2195}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadTVDBPortable", "MadTVDB-master\MadTVDBPortable.csproj", "{C0DE4627-C00C-4AE8-B237-D0D611FF33F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadTVDBPortable", "..\MadTVDB\MadTVDBPortable.csproj", "{C0DE4627-C00C-4AE8-B237-D0D611FF33F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
