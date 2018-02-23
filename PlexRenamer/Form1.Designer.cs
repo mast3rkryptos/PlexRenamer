@@ -134,9 +134,9 @@
             this.panelFileInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelFileInfo.Controls.Add(this.checkBoxTitleLookup);
             this.panelFileInfo.Controls.Add(this.comboBoxEndingEpisode);
-            this.panelFileInfo.Controls.Add(this.textBoxYear);
             this.panelFileInfo.Controls.Add(this.labelYear);
             this.panelFileInfo.Controls.Add(this.comboBoxType);
+            this.panelFileInfo.Controls.Add(this.textBoxYear);
             this.panelFileInfo.Controls.Add(this.labelType);
             this.panelFileInfo.Controls.Add(this.textBoxDestination);
             this.panelFileInfo.Controls.Add(this.buttonFilePlay);
@@ -223,7 +223,7 @@
             "48",
             "49",
             "50"});
-            this.comboBoxEndingEpisode.Location = new System.Drawing.Point(310, 55);
+            this.comboBoxEndingEpisode.Location = new System.Drawing.Point(154, 56);
             this.comboBoxEndingEpisode.Name = "comboBoxEndingEpisode";
             this.comboBoxEndingEpisode.Size = new System.Drawing.Size(41, 21);
             this.comboBoxEndingEpisode.TabIndex = 16;
@@ -231,16 +231,16 @@
             // 
             // textBoxYear
             // 
-            this.textBoxYear.Location = new System.Drawing.Point(205, 29);
+            this.textBoxYear.Location = new System.Drawing.Point(301, 56);
             this.textBoxYear.Name = "textBoxYear";
-            this.textBoxYear.Size = new System.Drawing.Size(100, 20);
+            this.textBoxYear.Size = new System.Drawing.Size(50, 20);
             this.textBoxYear.TabIndex = 15;
             this.textBoxYear.TextChanged += new System.EventHandler(this.textBoxYear_TextChanged);
             // 
             // labelYear
             // 
             this.labelYear.AutoSize = true;
-            this.labelYear.Location = new System.Drawing.Point(170, 32);
+            this.labelYear.Location = new System.Drawing.Point(266, 59);
             this.labelYear.Name = "labelYear";
             this.labelYear.Size = new System.Drawing.Size(29, 13);
             this.labelYear.TabIndex = 14;
@@ -288,9 +288,9 @@
             // comboBoxShow
             // 
             this.comboBoxShow.FormattingEnabled = true;
-            this.comboBoxShow.Location = new System.Drawing.Point(43, 56);
+            this.comboBoxShow.Location = new System.Drawing.Point(210, 28);
             this.comboBoxShow.Name = "comboBoxShow";
-            this.comboBoxShow.Size = new System.Drawing.Size(129, 21);
+            this.comboBoxShow.Size = new System.Drawing.Size(141, 21);
             this.comboBoxShow.Sorted = true;
             this.comboBoxShow.TabIndex = 9;
             this.comboBoxShow.SelectedIndexChanged += new System.EventHandler(this.comboBoxShow_SelectedIndexChanged);
@@ -299,7 +299,7 @@
             // labelShow
             // 
             this.labelShow.AutoSize = true;
-            this.labelShow.Location = new System.Drawing.Point(3, 59);
+            this.labelShow.Location = new System.Drawing.Point(170, 32);
             this.labelShow.Name = "labelShow";
             this.labelShow.Size = new System.Drawing.Size(34, 13);
             this.labelShow.TabIndex = 8;
@@ -378,7 +378,7 @@
             "48",
             "49",
             "50"});
-            this.comboBoxStartingEpisode.Location = new System.Drawing.Point(265, 55);
+            this.comboBoxStartingEpisode.Location = new System.Drawing.Point(107, 56);
             this.comboBoxStartingEpisode.Name = "comboBoxStartingEpisode";
             this.comboBoxStartingEpisode.Size = new System.Drawing.Size(41, 21);
             this.comboBoxStartingEpisode.TabIndex = 5;
@@ -387,11 +387,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(245, 59);
+            this.label5.Location = new System.Drawing.Point(90, 59);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(14, 13);
+            this.label5.Size = new System.Drawing.Size(20, 13);
             this.label5.TabIndex = 4;
-            this.label5.Text = "E";
+            this.label5.Text = "Ep";
             // 
             // comboBoxSeason
             // 
@@ -408,7 +408,7 @@
             "8",
             "9",
             "10"});
-            this.comboBoxSeason.Location = new System.Drawing.Point(198, 56);
+            this.comboBoxSeason.Location = new System.Drawing.Point(43, 56);
             this.comboBoxSeason.Name = "comboBoxSeason";
             this.comboBoxSeason.Size = new System.Drawing.Size(41, 21);
             this.comboBoxSeason.TabIndex = 3;
@@ -417,11 +417,11 @@
             // labelSeason
             // 
             this.labelSeason.AutoSize = true;
-            this.labelSeason.Location = new System.Drawing.Point(178, 59);
+            this.labelSeason.Location = new System.Drawing.Point(3, 59);
             this.labelSeason.Name = "labelSeason";
-            this.labelSeason.Size = new System.Drawing.Size(14, 13);
+            this.labelSeason.Size = new System.Drawing.Size(43, 13);
             this.labelSeason.TabIndex = 2;
-            this.labelSeason.Text = "S";
+            this.labelSeason.Text = "Season";
             // 
             // textBoxFile
             // 
@@ -513,7 +513,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 287);
+            this.ClientSize = new System.Drawing.Size(384, 285);
             this.Controls.Add(this.labelFileInfo);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.buttonSkip);
