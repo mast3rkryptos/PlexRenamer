@@ -35,7 +35,8 @@ namespace PlexRenamer
             textBoxInputFolder.Text = MySettings.Default.InputFolder;
             textBoxOutputFolder.Text = MySettings.Default.OutputFolder;
             textBoxExtensionFilter.Text = MySettings.Default.ExtensionFilter;
-            checkBoxMove.Checked = MySettings.Default.Move;
+            comboBoxOperation.Text = MySettings.Default.Move;
+            textBoxVlcExecutable.Text = MySettings.Default.VLCExecutable;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -48,20 +49,20 @@ namespace PlexRenamer
         private void ClearFileInfoDisplay()
         {
             textBoxFile.Clear();
-            textBoxYear.Clear();
             comboBoxShow.Text = "";
-            comboBoxSeason.Text = "";
-            comboBoxStartingEpisode.Text = "";
-            comboBoxEndingEpisode.Text = "";
+            numericUpDownSeason.Text = "";
+            numericUpDownStartingEpisode.Text = "";
+            numericUpDownEndingEpisode.Text = "";
+            textBoxYear.Clear();
             textBoxTitle.Clear();
             textBoxDestination.Clear();
         }
 
         private async void LookupAndUpdateTitle()
         {
-            if (checkBoxTitleLookup.Checked && comboBoxType.Text == "TV Shows")
+            if (checkBoxAutoTitleLookup.Checked && comboBoxType.Text == "TV Shows")
             {
-                textBoxTitle.Text = await Utilities.GetTVDBEpisodeTitle(comboBoxShow.Text, comboBoxSeason.Text, comboBoxStartingEpisode.Text);
+                textBoxTitle.Text = await Utilities.GetTVDBEpisodeTitle(comboBoxShow.Text, numericUpDownSeason.Value.ToString(), numericUpDownStartingEpisode.Value.ToString());
             }
         }
 
@@ -69,15 +70,15 @@ namespace PlexRenamer
         {
             // Replace the characters deemed invalid for Windows filenames
             string tempTitle = textBoxTitle.Text;
-            tempTitle = tempTitle.Replace("<", "");
-            tempTitle = tempTitle.Replace(">", "");
-            tempTitle = tempTitle.Replace(":", "");
+            tempTitle = tempTitle.Replace("<",  "");
+            tempTitle = tempTitle.Replace(">",  "");
+            tempTitle = tempTitle.Replace(":",  "");
             tempTitle = tempTitle.Replace("\"", "");
-            tempTitle = tempTitle.Replace("/", "");
+            tempTitle = tempTitle.Replace("/",  "");
             tempTitle = tempTitle.Replace("\\", "");
-            tempTitle = tempTitle.Replace("|", "");
-            tempTitle = tempTitle.Replace("?", "");
-            tempTitle = tempTitle.Replace("*", "");
+            tempTitle = tempTitle.Replace("|",  "");
+            tempTitle = tempTitle.Replace("?",  "");
+            tempTitle = tempTitle.Replace("*",  "");
 
             if (comboBoxType.Text == "TV Shows")
             {
@@ -168,7 +169,7 @@ namespace PlexRenamer
             }
         }
 
-        private void buttonGo_Click(object sender, EventArgs e)
+        private void buttonScan_Click(object sender, EventArgs e)
         {
             MySettings.Default.ExtensionFilter = textBoxExtensionFilter.Text;
 
@@ -184,6 +185,11 @@ namespace PlexRenamer
             UpdateDestination();
         }
 
+        private void buttonVlcExecutable_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxType.Text == "TV Shows")
@@ -193,8 +199,8 @@ namespace PlexRenamer
                 comboBoxSeason.Enabled = true;
                 comboBoxStartingEpisode.Enabled = true;
                 comboBoxEndingEpisode.Enabled = true;
-                textBoxTitle.Enabled = checkBoxTitleLookup.Checked ? false : true;
-                checkBoxTitleLookup.Checked = true;
+                textBoxTitle.Enabled = checkBoxAutoTitleLookup.Checked ? false : true;
+                checkBoxAutoTitleLookup.Checked = true;
             }
             else if (comboBoxType.Text == "Movies")
             {
@@ -204,7 +210,7 @@ namespace PlexRenamer
                 comboBoxStartingEpisode.Enabled = false;
                 comboBoxEndingEpisode.Enabled = false;
                 textBoxTitle.Enabled = true;
-                checkBoxTitleLookup.Checked = false;
+                checkBoxAutoTitleLookup.Checked = false;
             }
             LookupAndUpdateTitle();
             UpdateDestination();
@@ -322,12 +328,12 @@ namespace PlexRenamer
 
         private void checkBoxTitleLookup_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxTitleLookup.Checked)
+            if (checkBoxAutoTitleLookup.Checked)
             {
                 textBoxTitle.Enabled = false;
                 LookupAndUpdateTitle();
             }
-            else if (checkBoxTitleLookup.Checked && comboBoxType.Text == "TV Shows")
+            else if (checkBoxAutoTitleLookup.Checked && comboBoxType.Text == "TV Shows")
             {
                 textBoxTitle.Enabled = true;
             }

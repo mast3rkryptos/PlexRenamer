@@ -17,8 +17,11 @@
     <Setting Name="ExtensionFilter" Type="System.String" Scope="User">
       <Value Profile="(Default)">mkv, mp4</Value>
     </Setting>
-    <Setting Name="Move" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="Move" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Move</Value>
+    </Setting>
+    <Setting Name="VLCExecutable" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

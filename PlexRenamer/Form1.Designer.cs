@@ -35,40 +35,47 @@
             this.buttonInputFolder = new System.Windows.Forms.Button();
             this.buttonOutputFolder = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.buttonGo = new System.Windows.Forms.Button();
-            this.panelFileInfo = new System.Windows.Forms.Panel();
-            this.checkBoxTitleLookup = new System.Windows.Forms.CheckBox();
-            this.comboBoxEndingEpisode = new System.Windows.Forms.ComboBox();
-            this.textBoxYear = new System.Windows.Forms.TextBox();
+            this.buttonScan = new System.Windows.Forms.Button();
+            this.checkBoxAutoTitleLookup = new System.Windows.Forms.CheckBox();
             this.labelYear = new System.Windows.Forms.Label();
-            this.comboBoxType = new System.Windows.Forms.ComboBox();
+            this.textBoxYear = new System.Windows.Forms.TextBox();
             this.labelType = new System.Windows.Forms.Label();
             this.textBoxDestination = new System.Windows.Forms.TextBox();
-            this.buttonFilePlay = new System.Windows.Forms.Button();
-            this.comboBoxShow = new System.Windows.Forms.ComboBox();
             this.labelShow = new System.Windows.Forms.Label();
             this.textBoxTitle = new System.Windows.Forms.TextBox();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.comboBoxStartingEpisode = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBoxSeason = new System.Windows.Forms.ComboBox();
+            this.labelEpisode = new System.Windows.Forms.Label();
             this.labelSeason = new System.Windows.Forms.Label();
+            this.comboBoxType = new System.Windows.Forms.ComboBox();
+            this.buttonFilePlay = new System.Windows.Forms.Button();
+            this.comboBoxShow = new System.Windows.Forms.ComboBox();
             this.textBoxFile = new System.Windows.Forms.TextBox();
             this.labelFile = new System.Windows.Forms.Label();
             this.buttonSkip = new System.Windows.Forms.Button();
             this.buttonApply = new System.Windows.Forms.Button();
-            this.checkBoxMove = new System.Windows.Forms.CheckBox();
             this.labelExtensionFilter = new System.Windows.Forms.Label();
             this.textBoxExtensionFilter = new System.Windows.Forms.TextBox();
             this.buttonRefresh = new System.Windows.Forms.Button();
-            this.labelFileInfo = new System.Windows.Forms.Label();
-            this.panelFileInfo.SuspendLayout();
+            this.groupBoxConfig = new System.Windows.Forms.GroupBox();
+            this.labelVlcExecutable = new System.Windows.Forms.Label();
+            this.textBoxVlcExecutable = new System.Windows.Forms.TextBox();
+            this.buttonVlcExecutable = new System.Windows.Forms.Button();
+            this.groupBoxFileInfo = new System.Windows.Forms.GroupBox();
+            this.numericUpDownEndingEpisode = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownStartingEpisode = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownSeason = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxOperation = new System.Windows.Forms.ComboBox();
+            this.groupBoxConfig.SuspendLayout();
+            this.groupBoxFileInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndingEpisode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartingEpisode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeason)).BeginInit();
             this.SuspendLayout();
             // 
             // labelInputFolder
             // 
             this.labelInputFolder.AutoSize = true;
-            this.labelInputFolder.Location = new System.Drawing.Point(13, 13);
+            this.labelInputFolder.Location = new System.Drawing.Point(6, 22);
             this.labelInputFolder.Name = "labelInputFolder";
             this.labelInputFolder.Size = new System.Drawing.Size(63, 13);
             this.labelInputFolder.TabIndex = 0;
@@ -76,24 +83,24 @@
             // 
             // textBoxInputFolder
             // 
-            this.textBoxInputFolder.Location = new System.Drawing.Point(82, 10);
+            this.textBoxInputFolder.Location = new System.Drawing.Point(96, 19);
             this.textBoxInputFolder.Name = "textBoxInputFolder";
             this.textBoxInputFolder.ReadOnly = true;
-            this.textBoxInputFolder.Size = new System.Drawing.Size(206, 20);
+            this.textBoxInputFolder.Size = new System.Drawing.Size(202, 20);
             this.textBoxInputFolder.TabIndex = 1;
             // 
             // textBoxOutputFolder
             // 
-            this.textBoxOutputFolder.Location = new System.Drawing.Point(82, 37);
+            this.textBoxOutputFolder.Location = new System.Drawing.Point(96, 71);
             this.textBoxOutputFolder.Name = "textBoxOutputFolder";
             this.textBoxOutputFolder.ReadOnly = true;
-            this.textBoxOutputFolder.Size = new System.Drawing.Size(206, 20);
+            this.textBoxOutputFolder.Size = new System.Drawing.Size(202, 20);
             this.textBoxOutputFolder.TabIndex = 2;
             // 
             // labelOutputFolder
             // 
             this.labelOutputFolder.AutoSize = true;
-            this.labelOutputFolder.Location = new System.Drawing.Point(13, 40);
+            this.labelOutputFolder.Location = new System.Drawing.Point(6, 74);
             this.labelOutputFolder.Name = "labelOutputFolder";
             this.labelOutputFolder.Size = new System.Drawing.Size(71, 13);
             this.labelOutputFolder.TabIndex = 3;
@@ -101,9 +108,9 @@
             // 
             // buttonInputFolder
             // 
-            this.buttonInputFolder.Location = new System.Drawing.Point(294, 10);
+            this.buttonInputFolder.Location = new System.Drawing.Point(306, 19);
             this.buttonInputFolder.Name = "buttonInputFolder";
-            this.buttonInputFolder.Size = new System.Drawing.Size(24, 20);
+            this.buttonInputFolder.Size = new System.Drawing.Size(48, 20);
             this.buttonInputFolder.TabIndex = 4;
             this.buttonInputFolder.Text = "...";
             this.buttonInputFolder.UseVisualStyleBackColor = true;
@@ -111,157 +118,58 @@
             // 
             // buttonOutputFolder
             // 
-            this.buttonOutputFolder.Location = new System.Drawing.Point(294, 37);
+            this.buttonOutputFolder.Location = new System.Drawing.Point(306, 71);
             this.buttonOutputFolder.Name = "buttonOutputFolder";
-            this.buttonOutputFolder.Size = new System.Drawing.Size(24, 20);
+            this.buttonOutputFolder.Size = new System.Drawing.Size(48, 20);
             this.buttonOutputFolder.TabIndex = 5;
             this.buttonOutputFolder.Text = "...";
             this.buttonOutputFolder.UseVisualStyleBackColor = true;
             this.buttonOutputFolder.Click += new System.EventHandler(this.buttonOutputFolder_Click);
             // 
-            // buttonGo
+            // buttonScan
             // 
-            this.buttonGo.Location = new System.Drawing.Point(324, 10);
-            this.buttonGo.Name = "buttonGo";
-            this.buttonGo.Size = new System.Drawing.Size(48, 48);
-            this.buttonGo.TabIndex = 6;
-            this.buttonGo.Text = "Go";
-            this.buttonGo.UseVisualStyleBackColor = true;
-            this.buttonGo.Click += new System.EventHandler(this.buttonGo_Click);
+            this.buttonScan.Location = new System.Drawing.Point(306, 45);
+            this.buttonScan.Name = "buttonScan";
+            this.buttonScan.Size = new System.Drawing.Size(48, 20);
+            this.buttonScan.TabIndex = 6;
+            this.buttonScan.Text = "Scan";
+            this.buttonScan.UseVisualStyleBackColor = true;
+            this.buttonScan.Click += new System.EventHandler(this.buttonScan_Click);
             // 
-            // panelFileInfo
+            // checkBoxAutoTitleLookup
             // 
-            this.panelFileInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelFileInfo.Controls.Add(this.checkBoxTitleLookup);
-            this.panelFileInfo.Controls.Add(this.comboBoxEndingEpisode);
-            this.panelFileInfo.Controls.Add(this.labelYear);
-            this.panelFileInfo.Controls.Add(this.comboBoxType);
-            this.panelFileInfo.Controls.Add(this.textBoxYear);
-            this.panelFileInfo.Controls.Add(this.labelType);
-            this.panelFileInfo.Controls.Add(this.textBoxDestination);
-            this.panelFileInfo.Controls.Add(this.buttonFilePlay);
-            this.panelFileInfo.Controls.Add(this.comboBoxShow);
-            this.panelFileInfo.Controls.Add(this.labelShow);
-            this.panelFileInfo.Controls.Add(this.textBoxTitle);
-            this.panelFileInfo.Controls.Add(this.labelTitle);
-            this.panelFileInfo.Controls.Add(this.comboBoxStartingEpisode);
-            this.panelFileInfo.Controls.Add(this.label5);
-            this.panelFileInfo.Controls.Add(this.comboBoxSeason);
-            this.panelFileInfo.Controls.Add(this.labelSeason);
-            this.panelFileInfo.Controls.Add(this.textBoxFile);
-            this.panelFileInfo.Controls.Add(this.labelFile);
-            this.panelFileInfo.Location = new System.Drawing.Point(12, 107);
-            this.panelFileInfo.Name = "panelFileInfo";
-            this.panelFileInfo.Size = new System.Drawing.Size(360, 138);
-            this.panelFileInfo.TabIndex = 7;
-            // 
-            // checkBoxTitleLookup
-            // 
-            this.checkBoxTitleLookup.AutoSize = true;
-            this.checkBoxTitleLookup.Checked = true;
-            this.checkBoxTitleLookup.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxTitleLookup.Location = new System.Drawing.Point(271, 85);
-            this.checkBoxTitleLookup.Name = "checkBoxTitleLookup";
-            this.checkBoxTitleLookup.Size = new System.Drawing.Size(87, 17);
-            this.checkBoxTitleLookup.TabIndex = 17;
-            this.checkBoxTitleLookup.Text = "Auto-Lookup";
-            this.checkBoxTitleLookup.UseVisualStyleBackColor = true;
-            this.checkBoxTitleLookup.CheckedChanged += new System.EventHandler(this.checkBoxTitleLookup_CheckedChanged);
-            // 
-            // comboBoxEndingEpisode
-            // 
-            this.comboBoxEndingEpisode.FormattingEnabled = true;
-            this.comboBoxEndingEpisode.Items.AddRange(new object[] {
-            "",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "30",
-            "31",
-            "32",
-            "33",
-            "34",
-            "35",
-            "36",
-            "37",
-            "38",
-            "39",
-            "40",
-            "41",
-            "42",
-            "43",
-            "44",
-            "45",
-            "46",
-            "47",
-            "48",
-            "49",
-            "50"});
-            this.comboBoxEndingEpisode.Location = new System.Drawing.Point(154, 56);
-            this.comboBoxEndingEpisode.Name = "comboBoxEndingEpisode";
-            this.comboBoxEndingEpisode.Size = new System.Drawing.Size(41, 21);
-            this.comboBoxEndingEpisode.TabIndex = 16;
-            this.comboBoxEndingEpisode.SelectedIndexChanged += new System.EventHandler(this.comboBoxEndingEpisode_SelectedIndexChanged);
-            // 
-            // textBoxYear
-            // 
-            this.textBoxYear.Location = new System.Drawing.Point(301, 56);
-            this.textBoxYear.Name = "textBoxYear";
-            this.textBoxYear.Size = new System.Drawing.Size(50, 20);
-            this.textBoxYear.TabIndex = 15;
-            this.textBoxYear.TextChanged += new System.EventHandler(this.textBoxYear_TextChanged);
+            this.checkBoxAutoTitleLookup.AutoSize = true;
+            this.checkBoxAutoTitleLookup.Checked = true;
+            this.checkBoxAutoTitleLookup.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxAutoTitleLookup.Location = new System.Drawing.Point(267, 101);
+            this.checkBoxAutoTitleLookup.Name = "checkBoxAutoTitleLookup";
+            this.checkBoxAutoTitleLookup.Size = new System.Drawing.Size(87, 17);
+            this.checkBoxAutoTitleLookup.TabIndex = 17;
+            this.checkBoxAutoTitleLookup.Text = "Auto-Lookup";
+            this.checkBoxAutoTitleLookup.UseVisualStyleBackColor = true;
+            this.checkBoxAutoTitleLookup.CheckedChanged += new System.EventHandler(this.checkBoxTitleLookup_CheckedChanged);
             // 
             // labelYear
             // 
             this.labelYear.AutoSize = true;
-            this.labelYear.Location = new System.Drawing.Point(266, 59);
+            this.labelYear.Location = new System.Drawing.Point(269, 75);
             this.labelYear.Name = "labelYear";
             this.labelYear.Size = new System.Drawing.Size(29, 13);
             this.labelYear.TabIndex = 14;
             this.labelYear.Text = "Year";
             // 
-            // comboBoxType
+            // textBoxYear
             // 
-            this.comboBoxType.FormattingEnabled = true;
-            this.comboBoxType.Items.AddRange(new object[] {
-            "Movies",
-            "TV Shows"});
-            this.comboBoxType.Location = new System.Drawing.Point(43, 29);
-            this.comboBoxType.Name = "comboBoxType";
-            this.comboBoxType.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxType.TabIndex = 13;
-            this.comboBoxType.SelectedIndexChanged += new System.EventHandler(this.comboBoxType_SelectedIndexChanged);
+            this.textBoxYear.Location = new System.Drawing.Point(304, 72);
+            this.textBoxYear.Name = "textBoxYear";
+            this.textBoxYear.Size = new System.Drawing.Size(50, 20);
+            this.textBoxYear.TabIndex = 15;
+            this.textBoxYear.TextChanged += new System.EventHandler(this.textBoxYear_TextChanged);
             // 
             // labelType
             // 
             this.labelType.AutoSize = true;
-            this.labelType.Location = new System.Drawing.Point(3, 32);
+            this.labelType.Location = new System.Drawing.Point(6, 48);
             this.labelType.Name = "labelType";
             this.labelType.Size = new System.Drawing.Size(31, 13);
             this.labelType.TabIndex = 12;
@@ -269,15 +177,72 @@
             // 
             // textBoxDestination
             // 
-            this.textBoxDestination.Location = new System.Drawing.Point(4, 109);
+            this.textBoxDestination.Location = new System.Drawing.Point(9, 125);
             this.textBoxDestination.Name = "textBoxDestination";
             this.textBoxDestination.ReadOnly = true;
-            this.textBoxDestination.Size = new System.Drawing.Size(347, 20);
+            this.textBoxDestination.Size = new System.Drawing.Size(345, 20);
             this.textBoxDestination.TabIndex = 11;
+            // 
+            // labelShow
+            // 
+            this.labelShow.AutoSize = true;
+            this.labelShow.Location = new System.Drawing.Point(172, 48);
+            this.labelShow.Name = "labelShow";
+            this.labelShow.Size = new System.Drawing.Size(34, 13);
+            this.labelShow.TabIndex = 8;
+            this.labelShow.Text = "Show";
+            // 
+            // textBoxTitle
+            // 
+            this.textBoxTitle.Location = new System.Drawing.Point(55, 99);
+            this.textBoxTitle.Name = "textBoxTitle";
+            this.textBoxTitle.ReadOnly = true;
+            this.textBoxTitle.Size = new System.Drawing.Size(206, 20);
+            this.textBoxTitle.TabIndex = 7;
+            this.textBoxTitle.TextChanged += new System.EventHandler(this.textBoxTitle_TextChanged);
+            // 
+            // labelTitle
+            // 
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Location = new System.Drawing.Point(6, 102);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(27, 13);
+            this.labelTitle.TabIndex = 6;
+            this.labelTitle.Text = "Title";
+            // 
+            // labelEpisode
+            // 
+            this.labelEpisode.AutoSize = true;
+            this.labelEpisode.Location = new System.Drawing.Point(102, 75);
+            this.labelEpisode.Name = "labelEpisode";
+            this.labelEpisode.Size = new System.Drawing.Size(45, 13);
+            this.labelEpisode.TabIndex = 4;
+            this.labelEpisode.Text = "Episode";
+            // 
+            // labelSeason
+            // 
+            this.labelSeason.AutoSize = true;
+            this.labelSeason.Location = new System.Drawing.Point(6, 75);
+            this.labelSeason.Name = "labelSeason";
+            this.labelSeason.Size = new System.Drawing.Size(43, 13);
+            this.labelSeason.TabIndex = 2;
+            this.labelSeason.Text = "Season";
+            // 
+            // comboBoxType
+            // 
+            this.comboBoxType.FormattingEnabled = true;
+            this.comboBoxType.Items.AddRange(new object[] {
+            "Movies",
+            "TV Shows"});
+            this.comboBoxType.Location = new System.Drawing.Point(55, 45);
+            this.comboBoxType.Name = "comboBoxType";
+            this.comboBoxType.Size = new System.Drawing.Size(111, 21);
+            this.comboBoxType.TabIndex = 13;
+            this.comboBoxType.SelectedIndexChanged += new System.EventHandler(this.comboBoxType_SelectedIndexChanged);
             // 
             // buttonFilePlay
             // 
-            this.buttonFilePlay.Location = new System.Drawing.Point(329, 3);
+            this.buttonFilePlay.Location = new System.Drawing.Point(330, 19);
             this.buttonFilePlay.Name = "buttonFilePlay";
             this.buttonFilePlay.Size = new System.Drawing.Size(24, 20);
             this.buttonFilePlay.TabIndex = 8;
@@ -288,7 +253,7 @@
             // comboBoxShow
             // 
             this.comboBoxShow.FormattingEnabled = true;
-            this.comboBoxShow.Location = new System.Drawing.Point(210, 28);
+            this.comboBoxShow.Location = new System.Drawing.Point(212, 45);
             this.comboBoxShow.Name = "comboBoxShow";
             this.comboBoxShow.Size = new System.Drawing.Size(141, 21);
             this.comboBoxShow.Sorted = true;
@@ -296,145 +261,18 @@
             this.comboBoxShow.SelectedIndexChanged += new System.EventHandler(this.comboBoxShow_SelectedIndexChanged);
             this.comboBoxShow.TextUpdate += new System.EventHandler(this.comboBoxShow_TextUpdate);
             // 
-            // labelShow
-            // 
-            this.labelShow.AutoSize = true;
-            this.labelShow.Location = new System.Drawing.Point(170, 32);
-            this.labelShow.Name = "labelShow";
-            this.labelShow.Size = new System.Drawing.Size(34, 13);
-            this.labelShow.TabIndex = 8;
-            this.labelShow.Text = "Show";
-            // 
-            // textBoxTitle
-            // 
-            this.textBoxTitle.Enabled = false;
-            this.textBoxTitle.Location = new System.Drawing.Point(43, 83);
-            this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(222, 20);
-            this.textBoxTitle.TabIndex = 7;
-            this.textBoxTitle.TextChanged += new System.EventHandler(this.textBoxTitle_TextChanged);
-            // 
-            // labelTitle
-            // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(3, 86);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(27, 13);
-            this.labelTitle.TabIndex = 6;
-            this.labelTitle.Text = "Title";
-            // 
-            // comboBoxStartingEpisode
-            // 
-            this.comboBoxStartingEpisode.FormattingEnabled = true;
-            this.comboBoxStartingEpisode.Items.AddRange(new object[] {
-            "",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "30",
-            "31",
-            "32",
-            "33",
-            "34",
-            "35",
-            "36",
-            "37",
-            "38",
-            "39",
-            "40",
-            "41",
-            "42",
-            "43",
-            "44",
-            "45",
-            "46",
-            "47",
-            "48",
-            "49",
-            "50"});
-            this.comboBoxStartingEpisode.Location = new System.Drawing.Point(107, 56);
-            this.comboBoxStartingEpisode.Name = "comboBoxStartingEpisode";
-            this.comboBoxStartingEpisode.Size = new System.Drawing.Size(41, 21);
-            this.comboBoxStartingEpisode.TabIndex = 5;
-            this.comboBoxStartingEpisode.SelectedIndexChanged += new System.EventHandler(this.comboBoxStartingEpisode_SelectedIndexChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(90, 59);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(20, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Ep";
-            // 
-            // comboBoxSeason
-            // 
-            this.comboBoxSeason.FormattingEnabled = true;
-            this.comboBoxSeason.Items.AddRange(new object[] {
-            "",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.comboBoxSeason.Location = new System.Drawing.Point(43, 56);
-            this.comboBoxSeason.Name = "comboBoxSeason";
-            this.comboBoxSeason.Size = new System.Drawing.Size(41, 21);
-            this.comboBoxSeason.TabIndex = 3;
-            this.comboBoxSeason.SelectedIndexChanged += new System.EventHandler(this.comboBoxSeason_SelectedIndexChanged);
-            // 
-            // labelSeason
-            // 
-            this.labelSeason.AutoSize = true;
-            this.labelSeason.Location = new System.Drawing.Point(3, 59);
-            this.labelSeason.Name = "labelSeason";
-            this.labelSeason.Size = new System.Drawing.Size(43, 13);
-            this.labelSeason.TabIndex = 2;
-            this.labelSeason.Text = "Season";
-            // 
             // textBoxFile
             // 
-            this.textBoxFile.Location = new System.Drawing.Point(43, 3);
+            this.textBoxFile.Location = new System.Drawing.Point(55, 19);
             this.textBoxFile.Name = "textBoxFile";
             this.textBoxFile.ReadOnly = true;
-            this.textBoxFile.Size = new System.Drawing.Size(280, 20);
+            this.textBoxFile.Size = new System.Drawing.Size(270, 20);
             this.textBoxFile.TabIndex = 1;
             // 
             // labelFile
             // 
             this.labelFile.AutoSize = true;
-            this.labelFile.Location = new System.Drawing.Point(3, 6);
+            this.labelFile.Location = new System.Drawing.Point(6, 22);
             this.labelFile.Name = "labelFile";
             this.labelFile.Size = new System.Drawing.Size(23, 13);
             this.labelFile.TabIndex = 0;
@@ -442,7 +280,7 @@
             // 
             // buttonSkip
             // 
-            this.buttonSkip.Location = new System.Drawing.Point(270, 251);
+            this.buttonSkip.Location = new System.Drawing.Point(270, 303);
             this.buttonSkip.Name = "buttonSkip";
             this.buttonSkip.Size = new System.Drawing.Size(48, 23);
             this.buttonSkip.TabIndex = 16;
@@ -452,7 +290,7 @@
             // 
             // buttonApply
             // 
-            this.buttonApply.Location = new System.Drawing.Point(324, 251);
+            this.buttonApply.Location = new System.Drawing.Point(324, 303);
             this.buttonApply.Name = "buttonApply";
             this.buttonApply.Size = new System.Drawing.Size(48, 23);
             this.buttonApply.TabIndex = 10;
@@ -460,23 +298,10 @@
             this.buttonApply.UseVisualStyleBackColor = true;
             this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
             // 
-            // checkBoxMove
-            // 
-            this.checkBoxMove.AutoSize = true;
-            this.checkBoxMove.Checked = true;
-            this.checkBoxMove.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxMove.Location = new System.Drawing.Point(211, 255);
-            this.checkBoxMove.Name = "checkBoxMove";
-            this.checkBoxMove.Size = new System.Drawing.Size(53, 17);
-            this.checkBoxMove.TabIndex = 12;
-            this.checkBoxMove.Text = "Move";
-            this.checkBoxMove.UseVisualStyleBackColor = true;
-            this.checkBoxMove.CheckedChanged += new System.EventHandler(this.checkBoxMove_CheckedChanged);
-            // 
             // labelExtensionFilter
             // 
             this.labelExtensionFilter.AutoSize = true;
-            this.labelExtensionFilter.Location = new System.Drawing.Point(13, 65);
+            this.labelExtensionFilter.Location = new System.Drawing.Point(6, 49);
             this.labelExtensionFilter.Name = "labelExtensionFilter";
             this.labelExtensionFilter.Size = new System.Drawing.Size(78, 13);
             this.labelExtensionFilter.TabIndex = 14;
@@ -484,59 +309,153 @@
             // 
             // textBoxExtensionFilter
             // 
-            this.textBoxExtensionFilter.Location = new System.Drawing.Point(97, 62);
+            this.textBoxExtensionFilter.Location = new System.Drawing.Point(96, 45);
             this.textBoxExtensionFilter.Name = "textBoxExtensionFilter";
-            this.textBoxExtensionFilter.Size = new System.Drawing.Size(275, 20);
+            this.textBoxExtensionFilter.Size = new System.Drawing.Size(202, 20);
             this.textBoxExtensionFilter.TabIndex = 15;
             this.textBoxExtensionFilter.Text = "mkv, mp4";
             // 
             // buttonRefresh
             // 
-            this.buttonRefresh.Location = new System.Drawing.Point(12, 251);
+            this.buttonRefresh.Location = new System.Drawing.Point(12, 303);
             this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(79, 23);
+            this.buttonRefresh.Size = new System.Drawing.Size(96, 23);
             this.buttonRefresh.TabIndex = 17;
             this.buttonRefresh.Text = "Refresh Lookup";
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
-            // labelFileInfo
+            // groupBoxConfig
             // 
-            this.labelFileInfo.AutoSize = true;
-            this.labelFileInfo.Location = new System.Drawing.Point(13, 91);
-            this.labelFileInfo.Name = "labelFileInfo";
-            this.labelFileInfo.Size = new System.Drawing.Size(47, 13);
-            this.labelFileInfo.TabIndex = 19;
-            this.labelFileInfo.Text = "File Info:";
+            this.groupBoxConfig.Controls.Add(this.labelVlcExecutable);
+            this.groupBoxConfig.Controls.Add(this.buttonInputFolder);
+            this.groupBoxConfig.Controls.Add(this.textBoxVlcExecutable);
+            this.groupBoxConfig.Controls.Add(this.buttonVlcExecutable);
+            this.groupBoxConfig.Controls.Add(this.labelExtensionFilter);
+            this.groupBoxConfig.Controls.Add(this.textBoxExtensionFilter);
+            this.groupBoxConfig.Controls.Add(this.textBoxInputFolder);
+            this.groupBoxConfig.Controls.Add(this.buttonScan);
+            this.groupBoxConfig.Controls.Add(this.textBoxOutputFolder);
+            this.groupBoxConfig.Controls.Add(this.labelOutputFolder);
+            this.groupBoxConfig.Controls.Add(this.labelInputFolder);
+            this.groupBoxConfig.Controls.Add(this.buttonOutputFolder);
+            this.groupBoxConfig.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxConfig.Name = "groupBoxConfig";
+            this.groupBoxConfig.Size = new System.Drawing.Size(360, 122);
+            this.groupBoxConfig.TabIndex = 20;
+            this.groupBoxConfig.TabStop = false;
+            this.groupBoxConfig.Text = "Config";
+            // 
+            // labelVlcExecutable
+            // 
+            this.labelVlcExecutable.AutoSize = true;
+            this.labelVlcExecutable.Location = new System.Drawing.Point(6, 99);
+            this.labelVlcExecutable.Name = "labelVlcExecutable";
+            this.labelVlcExecutable.Size = new System.Drawing.Size(83, 13);
+            this.labelVlcExecutable.TabIndex = 0;
+            this.labelVlcExecutable.Text = "VLC Executable";
+            // 
+            // textBoxVlcExecutable
+            // 
+            this.textBoxVlcExecutable.Location = new System.Drawing.Point(96, 96);
+            this.textBoxVlcExecutable.Name = "textBoxVlcExecutable";
+            this.textBoxVlcExecutable.ReadOnly = true;
+            this.textBoxVlcExecutable.Size = new System.Drawing.Size(202, 20);
+            this.textBoxVlcExecutable.TabIndex = 21;
+            // 
+            // buttonVlcExecutable
+            // 
+            this.buttonVlcExecutable.Location = new System.Drawing.Point(304, 96);
+            this.buttonVlcExecutable.Name = "buttonVlcExecutable";
+            this.buttonVlcExecutable.Size = new System.Drawing.Size(48, 20);
+            this.buttonVlcExecutable.TabIndex = 21;
+            this.buttonVlcExecutable.Text = "...";
+            this.buttonVlcExecutable.UseVisualStyleBackColor = true;
+            this.buttonVlcExecutable.Click += new System.EventHandler(this.buttonVlcExecutable_Click);
+            // 
+            // groupBoxFileInfo
+            // 
+            this.groupBoxFileInfo.Controls.Add(this.numericUpDownEndingEpisode);
+            this.groupBoxFileInfo.Controls.Add(this.numericUpDownStartingEpisode);
+            this.groupBoxFileInfo.Controls.Add(this.numericUpDownSeason);
+            this.groupBoxFileInfo.Controls.Add(this.textBoxDestination);
+            this.groupBoxFileInfo.Controls.Add(this.checkBoxAutoTitleLookup);
+            this.groupBoxFileInfo.Controls.Add(this.textBoxFile);
+            this.groupBoxFileInfo.Controls.Add(this.labelYear);
+            this.groupBoxFileInfo.Controls.Add(this.labelTitle);
+            this.groupBoxFileInfo.Controls.Add(this.textBoxTitle);
+            this.groupBoxFileInfo.Controls.Add(this.buttonFilePlay);
+            this.groupBoxFileInfo.Controls.Add(this.comboBoxType);
+            this.groupBoxFileInfo.Controls.Add(this.textBoxYear);
+            this.groupBoxFileInfo.Controls.Add(this.comboBoxShow);
+            this.groupBoxFileInfo.Controls.Add(this.labelType);
+            this.groupBoxFileInfo.Controls.Add(this.labelShow);
+            this.groupBoxFileInfo.Controls.Add(this.labelEpisode);
+            this.groupBoxFileInfo.Controls.Add(this.labelFile);
+            this.groupBoxFileInfo.Controls.Add(this.labelSeason);
+            this.groupBoxFileInfo.Location = new System.Drawing.Point(12, 140);
+            this.groupBoxFileInfo.Name = "groupBoxFileInfo";
+            this.groupBoxFileInfo.Size = new System.Drawing.Size(360, 157);
+            this.groupBoxFileInfo.TabIndex = 21;
+            this.groupBoxFileInfo.TabStop = false;
+            this.groupBoxFileInfo.Text = "File Info";
+            // 
+            // numericUpDownEndingEpisode
+            // 
+            this.numericUpDownEndingEpisode.Location = new System.Drawing.Point(200, 72);
+            this.numericUpDownEndingEpisode.Name = "numericUpDownEndingEpisode";
+            this.numericUpDownEndingEpisode.Size = new System.Drawing.Size(41, 20);
+            this.numericUpDownEndingEpisode.TabIndex = 24;
+            // 
+            // numericUpDownStartingEpisode
+            // 
+            this.numericUpDownStartingEpisode.Location = new System.Drawing.Point(153, 72);
+            this.numericUpDownStartingEpisode.Name = "numericUpDownStartingEpisode";
+            this.numericUpDownStartingEpisode.Size = new System.Drawing.Size(41, 20);
+            this.numericUpDownStartingEpisode.TabIndex = 23;
+            // 
+            // numericUpDownSeason
+            // 
+            this.numericUpDownSeason.Location = new System.Drawing.Point(55, 72);
+            this.numericUpDownSeason.Name = "numericUpDownSeason";
+            this.numericUpDownSeason.Size = new System.Drawing.Size(41, 20);
+            this.numericUpDownSeason.TabIndex = 22;
+            // 
+            // comboBoxOperation
+            // 
+            this.comboBoxOperation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxOperation.FormattingEnabled = true;
+            this.comboBoxOperation.Items.AddRange(new object[] {
+            "Copy",
+            "Move"});
+            this.comboBoxOperation.Location = new System.Drawing.Point(212, 304);
+            this.comboBoxOperation.Name = "comboBoxOperation";
+            this.comboBoxOperation.Size = new System.Drawing.Size(52, 21);
+            this.comboBoxOperation.TabIndex = 18;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 285);
-            this.Controls.Add(this.labelFileInfo);
+            this.ClientSize = new System.Drawing.Size(384, 361);
+            this.Controls.Add(this.comboBoxOperation);
+            this.Controls.Add(this.groupBoxFileInfo);
+            this.Controls.Add(this.groupBoxConfig);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.buttonSkip);
-            this.Controls.Add(this.textBoxExtensionFilter);
-            this.Controls.Add(this.labelExtensionFilter);
-            this.Controls.Add(this.checkBoxMove);
-            this.Controls.Add(this.panelFileInfo);
             this.Controls.Add(this.buttonApply);
-            this.Controls.Add(this.buttonGo);
-            this.Controls.Add(this.buttonOutputFolder);
-            this.Controls.Add(this.buttonInputFolder);
-            this.Controls.Add(this.labelOutputFolder);
-            this.Controls.Add(this.textBoxOutputFolder);
-            this.Controls.Add(this.textBoxInputFolder);
-            this.Controls.Add(this.labelInputFolder);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "PlexRenamer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.panelFileInfo.ResumeLayout(false);
-            this.panelFileInfo.PerformLayout();
+            this.groupBoxConfig.ResumeLayout(false);
+            this.groupBoxConfig.PerformLayout();
+            this.groupBoxFileInfo.ResumeLayout(false);
+            this.groupBoxFileInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndingEpisode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartingEpisode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeason)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -549,22 +468,18 @@
         private System.Windows.Forms.Button buttonInputFolder;
         private System.Windows.Forms.Button buttonOutputFolder;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.Button buttonGo;
-        private System.Windows.Forms.Panel panelFileInfo;
+        private System.Windows.Forms.Button buttonScan;
         private System.Windows.Forms.TextBox textBoxFile;
         private System.Windows.Forms.Label labelFile;
-        private System.Windows.Forms.ComboBox comboBoxSeason;
         private System.Windows.Forms.Label labelSeason;
         private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.ComboBox comboBoxStartingEpisode;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelEpisode;
         private System.Windows.Forms.Button buttonFilePlay;
         private System.Windows.Forms.ComboBox comboBoxShow;
         private System.Windows.Forms.Label labelShow;
         private System.Windows.Forms.TextBox textBoxTitle;
         private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.TextBox textBoxDestination;
-        private System.Windows.Forms.CheckBox checkBoxMove;
         private System.Windows.Forms.Label labelExtensionFilter;
         private System.Windows.Forms.TextBox textBoxExtensionFilter;
         private System.Windows.Forms.Button buttonSkip;
@@ -572,10 +487,17 @@
         private System.Windows.Forms.Label labelYear;
         private System.Windows.Forms.ComboBox comboBoxType;
         private System.Windows.Forms.Label labelType;
-        private System.Windows.Forms.ComboBox comboBoxEndingEpisode;
         private System.Windows.Forms.Button buttonRefresh;
-        private System.Windows.Forms.CheckBox checkBoxTitleLookup;
-        private System.Windows.Forms.Label labelFileInfo;
+        private System.Windows.Forms.CheckBox checkBoxAutoTitleLookup;
+        private System.Windows.Forms.GroupBox groupBoxConfig;
+        private System.Windows.Forms.TextBox textBoxVlcExecutable;
+        private System.Windows.Forms.Button buttonVlcExecutable;
+        private System.Windows.Forms.Label labelVlcExecutable;
+        private System.Windows.Forms.GroupBox groupBoxFileInfo;
+        private System.Windows.Forms.ComboBox comboBoxOperation;
+        private System.Windows.Forms.NumericUpDown numericUpDownEndingEpisode;
+        private System.Windows.Forms.NumericUpDown numericUpDownStartingEpisode;
+        private System.Windows.Forms.NumericUpDown numericUpDownSeason;
     }
 }
 

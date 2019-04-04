@@ -12,7 +12,7 @@ namespace PlexRenamer {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
     internal sealed partial class MySettings : global::System.Configuration.ApplicationSettingsBase {
         
         private static MySettings defaultInstance = ((MySettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new MySettings())));
@@ -75,13 +75,25 @@ namespace PlexRenamer {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool Move {
+        [global::System.Configuration.DefaultSettingValueAttribute("Move")]
+        public string Move {
             get {
-                return ((bool)(this["Move"]));
+                return ((string)(this["Move"]));
             }
             set {
                 this["Move"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string VLCExecutable {
+            get {
+                return ((string)(this["VLCExecutable"]));
+            }
+            set {
+                this["VLCExecutable"] = value;
             }
         }
     }
