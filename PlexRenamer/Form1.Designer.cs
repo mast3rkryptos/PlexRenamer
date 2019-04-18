@@ -65,6 +65,8 @@
             this.numericUpDownStartingEpisode = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownSeason = new System.Windows.Forms.NumericUpDown();
             this.comboBoxOperation = new System.Windows.Forms.ComboBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.textBoxStatus = new System.Windows.Forms.TextBox();
             this.groupBoxConfig.SuspendLayout();
             this.groupBoxFileInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEndingEpisode)).BeginInit();
@@ -147,7 +149,7 @@
             this.checkBoxAutoTitleLookup.TabIndex = 17;
             this.checkBoxAutoTitleLookup.Text = "Auto-Lookup";
             this.checkBoxAutoTitleLookup.UseVisualStyleBackColor = true;
-            this.checkBoxAutoTitleLookup.CheckedChanged += new System.EventHandler(this.checkBoxTitleLookup_CheckedChanged);
+            this.checkBoxAutoTitleLookup.CheckedChanged += new System.EventHandler(this.checkBoxAutoTitleLookup_CheckedChanged);
             // 
             // labelYear
             // 
@@ -194,9 +196,9 @@
             // 
             // textBoxTitle
             // 
+            this.textBoxTitle.Enabled = false;
             this.textBoxTitle.Location = new System.Drawing.Point(55, 99);
             this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.ReadOnly = true;
             this.textBoxTitle.Size = new System.Drawing.Size(206, 20);
             this.textBoxTitle.TabIndex = 7;
             this.textBoxTitle.TextChanged += new System.EventHandler(this.textBoxTitle_TextChanged);
@@ -230,6 +232,7 @@
             // 
             // comboBoxType
             // 
+            this.comboBoxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxType.FormattingEnabled = true;
             this.comboBoxType.Items.AddRange(new object[] {
             "Movies",
@@ -406,6 +409,7 @@
             this.numericUpDownEndingEpisode.Name = "numericUpDownEndingEpisode";
             this.numericUpDownEndingEpisode.Size = new System.Drawing.Size(41, 20);
             this.numericUpDownEndingEpisode.TabIndex = 24;
+            this.numericUpDownEndingEpisode.ValueChanged += new System.EventHandler(this.numericUpDownEndingEpisode_ValueChanged);
             // 
             // numericUpDownStartingEpisode
             // 
@@ -413,6 +417,7 @@
             this.numericUpDownStartingEpisode.Name = "numericUpDownStartingEpisode";
             this.numericUpDownStartingEpisode.Size = new System.Drawing.Size(41, 20);
             this.numericUpDownStartingEpisode.TabIndex = 23;
+            this.numericUpDownStartingEpisode.ValueChanged += new System.EventHandler(this.numericUpDownStartingEpisode_ValueChanged);
             // 
             // numericUpDownSeason
             // 
@@ -420,6 +425,7 @@
             this.numericUpDownSeason.Name = "numericUpDownSeason";
             this.numericUpDownSeason.Size = new System.Drawing.Size(41, 20);
             this.numericUpDownSeason.TabIndex = 22;
+            this.numericUpDownSeason.ValueChanged += new System.EventHandler(this.numericUpDownSeason_ValueChanged);
             // 
             // comboBoxOperation
             // 
@@ -433,11 +439,24 @@
             this.comboBoxOperation.Size = new System.Drawing.Size(52, 21);
             this.comboBoxOperation.TabIndex = 18;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // textBoxStatus
+            // 
+            this.textBoxStatus.Location = new System.Drawing.Point(12, 332);
+            this.textBoxStatus.Name = "textBoxStatus";
+            this.textBoxStatus.ReadOnly = true;
+            this.textBoxStatus.Size = new System.Drawing.Size(360, 20);
+            this.textBoxStatus.TabIndex = 25;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 361);
+            this.Controls.Add(this.textBoxStatus);
             this.Controls.Add(this.comboBoxOperation);
             this.Controls.Add(this.groupBoxFileInfo);
             this.Controls.Add(this.groupBoxConfig);
@@ -456,6 +475,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartingEpisode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeason)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -498,6 +518,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDownEndingEpisode;
         private System.Windows.Forms.NumericUpDown numericUpDownStartingEpisode;
         private System.Windows.Forms.NumericUpDown numericUpDownSeason;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox textBoxStatus;
     }
 }
 
