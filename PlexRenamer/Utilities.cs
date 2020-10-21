@@ -1,4 +1,7 @@
-﻿using MadTVDB.Models;
+﻿//#define USE_MADTVDB
+#if USE_MADTVDB
+using MadTVDB.Models;
+#endif
 
 using System;
 using System.Collections;
@@ -16,10 +19,11 @@ namespace PlexRenamer
         static System.Collections.Specialized.StringCollection log = new System.Collections.Specialized.StringCollection();
 
         // Is successful if this function has a non-null non-empty result to put into the out-param title
-        static public async Task<string> GetTVDBEpisodeTitle(string show, string season, string episode)
+        static public async Task<string> GetEpisodeTitle(string show, string season, string episode)
         {
             string title = "";
 
+#if USE_MADTVDB
             if (show != null && show != "" && season != null && season != "" && episode != null && episode != "")
             {
                 MadTVDB.MadTVDB madTVDB = new MadTVDB.MadTVDB("C4017334452A0FA1");
@@ -43,80 +47,8 @@ namespace PlexRenamer
                 }
             }
 
+#endif
             return title;
-        }
-
-        static public void ParseNonPlexFilepath(string filepath, out string season)
-        {
-
-            string pattern = @"[seasonSEASON_]+(\d+)[discDISC_]+\d+";
-            string containingFolder = Path.GetDirectoryName(filepath);
-
-            MatchCollection matches = Regex.Matches(filepath, pattern);
-
-            if (matches.Count > 0)
-            {
-                season = matches[0].Groups[1].Value;
-            }
-            else
-            {
-                season = "";
-            }
-        }
-
-        // This reads the Plex name format and returns the parsed values
-        // Movies: [root]\{movie name} ({movie year})\{movie name} ({movie year}).{ext}
-        // Returns true if the filename matches the TV or Movie Plex format
-        static public bool ParsePlexMovieFilename(string filepath, out string title, out string year)
-        {
-            string pattern = @"(.+) \(([0-9][0-9][0-9][0-9])\)";
-            string filename = Path.GetFileNameWithoutExtension(filepath);
-
-            MatchCollection matches = Regex.Matches(filename, pattern);
-
-            if (matches.Count > 0)
-            {
-                title = matches[0].Groups[1].Value;
-                year =  matches[0].Groups[2].Value;
-            }
-            else
-            {
-                title = "";
-                year = "";
-            }
-
-            return matches.Count != 0;
-        }
-
-        // This reads the Plex name format and returns the parsed values
-        // TV Shows: [root]\TV Shows\{show name}\Season ##\{show name} - s##e##[-e##] - {optional info}.{ext} 
-        // Returns true if the filename matches the TV or Movie Plex format
-        static public bool ParsePlexTVFilename(string filepath, out string show, out string season, out string startingEpisode, out string endingEpisode, out string optionalInfo)
-        {
-            string pattern = @"(.+) - s([0-9][0-9])e([0-9][0-9])(?:-e([0-9][0-9]))? - (.+)";
-            string filename = Path.GetFileNameWithoutExtension(filepath);
-
-            MatchCollection matches = Regex.Matches(filename, pattern);
-
-            if (matches.Count > 0)
-            {
-                show =              matches[0].Groups[1].Value;
-                season =            matches[0].Groups[2].Value;
-                startingEpisode =   matches[0].Groups[3].Value;
-                endingEpisode =     matches[0].Groups[4].Value;
-                optionalInfo =      matches[0].Groups[5].Value;
-                if (endingEpisode == "") endingEpisode = startingEpisode;
-            }
-            else
-            {
-                show = "";
-                season = "";
-                startingEpisode = "";
-                endingEpisode = "";
-                optionalInfo = "";
-            }
-
-            return matches.Count != 0;
         }
 
         static public ArrayList WalkDirectoryTree(System.IO.DirectoryInfo root, string[] extensionFilter = null)
