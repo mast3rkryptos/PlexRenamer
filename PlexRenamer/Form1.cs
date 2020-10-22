@@ -60,7 +60,7 @@ namespace PlexRenamer
 
         private async void LookupAndUpdateTitle()
         {
-            if (checkBoxAutoTitleLookup.Checked && comboBoxType.SelectedItem.Equals("TV Shows"))
+            if (checkBoxAutoTitleLookup.Checked && comboBoxType.SelectedItem != null && comboBoxType.SelectedItem.Equals("TV Shows"))
             {
                 textBoxTitle.Text = await Utilities.GetEpisodeTitle(comboBoxShow.Text, numericUpDownSeason.Value.ToString(), numericUpDownStartingEpisode.Value.ToString());
             }
@@ -80,7 +80,7 @@ namespace PlexRenamer
             tempTitle = tempTitle.Replace("?",  "");
             tempTitle = tempTitle.Replace("*",  "");
 
-            if (comboBoxType.SelectedItem.Equals("TV Shows"))
+            if (comboBoxType.SelectedItem != null && comboBoxType.SelectedItem.Equals("TV Shows"))
             {
                 string episodeStr = numericUpDownStartingEpisode.Value == numericUpDownEndingEpisode.Value ? numericUpDownStartingEpisode.Value.ToString() : numericUpDownStartingEpisode.Value + "-e" + numericUpDownEndingEpisode.Value;
 
@@ -99,7 +99,7 @@ namespace PlexRenamer
                         ((tempTitle == null || tempTitle == "") ? "" : (" - " + tempTitle)),
                         Path.GetExtension(textBoxFile.Text)));
             }
-            else if (comboBoxType.SelectedItem.Equals("Movies"))
+            else if (comboBoxType.SelectedItem != null && comboBoxType.SelectedItem.Equals("Movies"))
             {
                 textBoxDestination.Text = Path.Combine(
                     textBoxOutputFolder.Text,
@@ -229,7 +229,6 @@ namespace PlexRenamer
             {
                 ClearFileInfoDisplay();
                 textBoxStatus.Text = "End of file list!";
-                MessageBox.Show("End of file list!");
             }
         }
 
@@ -265,7 +264,7 @@ namespace PlexRenamer
             if (filesEnumerator.MoveNext()) // Go to the next file in the path
             {
                 textBoxFile.Text = filesEnumerator.Current.ToString();
-                if (comboBoxType.SelectedItem.Equals("TV Shows"))
+                if (comboBoxType.SelectedItem != null && comboBoxType.SelectedItem.Equals("TV Shows"))
                 {
                     // Advance Episode number
                     numericUpDownStartingEpisode.Value++;
@@ -278,7 +277,6 @@ namespace PlexRenamer
             {
                 ClearFileInfoDisplay();
                 textBoxStatus.Text = "End of file list!";
-                MessageBox.Show("End of file list!");
             }
         }
 
@@ -295,10 +293,13 @@ namespace PlexRenamer
 
         private void checkBoxAutoTitleLookup_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxAutoTitleLookup.Checked && comboBoxType.SelectedItem.Equals("TV Shows"))
+            if (checkBoxAutoTitleLookup.Checked) 
             {
                 textBoxTitle.Enabled = false;
-                LookupAndUpdateTitle();
+                if (comboBoxType.SelectedItem != null && comboBoxType.SelectedItem.Equals("TV Shows"))
+                {
+                    LookupAndUpdateTitle();
+                }
             }
             else
             {
